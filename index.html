@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>साहित्यसेतु (SahityaSetu) — भारतीय काव्यशास्त्र एवं साहित्यिक विधाओं का डिजिटल कोश</title>
+  <!-- Google Fonts for Classical Devanagari Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span class="brand-hi">साहित्यसेतु</span>
+        <span class="brand-en">SAHITYASETU</span>
+      </div>
+      <div class="nav-actions">
+        <button id="matraLabTrigger" type="button" class="btn-outline">📏 छंद-मात्रा गणक</button>
+        <button id="quizTrigger" type="button" class="btn-outline">🎯 अभ्यास प्रश्नोत्तरी</button>
+        <button id="compareTrigger" type="button" class="btn-outline">⇄ विधा-तुलना</button>
+        <button id="themeToggle" type="button" class="btn-icon" title="Change Theme">☀️</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero container">
+    <span class="hero-tag">// डिजिटल मानविकी एवं साहित्य चिंतन कोश</span>
+    <h1 class="hero-title">भारतीय काव्यशास्त्र और <span class="accent">साहित्यिक विधाओं</span> का अंतरंग संसार।</h1>
+    <p class="hero-sub">
+      काव्य की आत्मा, अलंकारों के शिल्प, छंदों के गणित और गद्य-पद्य विधाओं के ऐतिहासिक विकास को रटने के बजाय उदाहरणों, इंटरएक्टिव मात्रा-गणक और विश्लेषण के माध्यम से समझें।
+    </p>
+
+    <!-- Search & Pillar Filter Bar -->
+    <div class="controls-bar">
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="अलंकार, छंद, विधा या आचार्य खोजें (उदा. उपमा, दोहा, उपन्यास, मम्मट)..." />
+      </div>
+      <div class="category-pills" id="categoryPills">
+        <button type="button" class="pill active" data-cat="all">संपूर्ण कोश</button>
+        <button type="button" class="pill" data-cat="kavyadarshan">काव्य-दर्शन</button>
+        <button type="button" class="pill" data-cat="alankar">अलंकार-शिल्प</button>
+        <button type="button" class="pill" data-cat="chhand">छंद-गणित</button>
+        <button type="button" class="pill" data-cat="padya">पद्य-विधाएँ</button>
+        <button type="button" class="pill" data-cat="gadya">गद्य-विधाएँ</button>
+        <button type="button" class="pill pill-bookmark" data-cat="bookmarks">★ रिवीजन बुकमार्क <span id="bookmarkCountSpan">(0)</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Concept Cards Grid -->
+  <main class="container">
+    <div id="cardsGrid" class="cards-grid"></div>
+  </main>
+
+  <!-- Phase 2 Feature 1: Interactive Chhand Matra Counter & Visualizer -->
+  <section id="matraLabSection" class="feature-section container">
+    <div class="section-header">
+      <div>
+        <span class="hero-tag">// पिंगलशास्त्र एवं छंद-लय प्रयोगशाला</span>
+        <h2>इंटरएक्टिव छंद-मात्रा एवं वर्ण गणक (Laghu I • Guru S)</h2>
+        <p style="color: var(--text-muted); font-size: 0.94rem; margin-top: 0.25rem;">
+          कोई भी काव्य-पंक्ति लिखें या उदाहरण चुनें। किसी अक्षर की मात्रा (लघु I = 1 ⇄ गुरु S = 2) को उच्चारण के अनुसार बदलने के लिए उस अक्षर के कार्ड पर क्लिक करें।
+        </p>
+      </div>
+    </div>
+    <div id="matraPresetsBar" class="matra-presets"></div>
+    <textarea id="matraInput" class="matra-textarea" placeholder="यहाँ दोहा, चौपाई, सोरठा या कवित्त की पंक्ति लिखें..."></textarea>
+    <div id="matraSummaryBar" class="matra-summary-bar"></div>
+    <div id="matraLinesOutput" class="matra-lines-output"></div>
+  </section>
+
+  <!-- Phase 2 Feature 2: Interactive Alankar, Chhand & Theory Quiz Tester -->
+  <section id="quizSection" class="feature-section container">
+    <div class="section-header">
+      <div>
+        <span class="hero-tag">// स्व-मूल्यांकन एवं पहचान परीक्षण</span>
+        <h2>काव्य-पंक्ति पहचान एवं साहित्य प्रश्नोत्तरी</h2>
+      </div>
+      <div class="quiz-top-meta">
+        <span id="quizScoreBadge" class="chhand-detect-badge">स्कोर: 0 / 0</span>
+        <select id="quizFilterSelect" class="compare-select">
+          <option value="all">संपूर्ण अभ्यास (10 प्रश्न)</option>
+          <option value="alankar">केवल अलंकार पहचान</option>
+          <option value="chhand">केवल छंद पहचान</option>
+          <option value="theory">काव्य-दर्शन एवं विधाएँ</option>
+        </select>
+      </div>
+    </div>
+    <div id="quizContainer"></div>
+  </section>
+
+  <!-- Interactive Comparison Section (विधाओं में मौलिक अंतर) -->
+  <section id="comparisonSection" class="feature-section container">
+    <div class="section-header">
+      <div>
+        <span class="hero-tag">// संशय निवारण एवं तुलनात्मक दृष्टि</span>
+        <h2>साहित्यिक विधाओं में मौलिक अंतर</h2>
+      </div>
+      <select id="comparisonSelect" class="compare-select"></select>
+    </div>
+    <div id="comparisonBoard" class="comparison-board"></div>
+  </section>
+
+  <!-- Deep-Dive Concept Modal / Drawer -->
+  <div id="conceptModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <span id="modalCategory" class="card-badge"></span>
+          <h2 id="modalTitle" style="margin-top: 0.4rem;"></h2>
+        </div>
+        <div class="modal-header-actions">
+          <button id="modalBookmarkBtn" type="button" class="btn-close">☆ रिवीजन बुकमार्क</button>
+          <button id="closeModal" type="button" class="btn-close">✕ बंद करें</button>
+        </div>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+      <div class="modal-nav-footer">
+        <button id="prevConceptBtn" type="button" class="btn-outline">← पिछली अवधारणा</button>
+        <span id="modalPositionText" class="modal-nav-hint"></span>
+        <button id="nextConceptBtn" type="button" class="btn-outline">अगली अवधारणा →</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p><strong>साहित्यसेतु (SahityaSetu)</strong> — हिंदी साहित्य एवं भारतीय काव्यशास्त्र का ओपन-सोर्स वैचारिक मंच</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
