@@ -3,17 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#e11d48" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>साहित्यसेतु (SahityaSetu) — भारतीय काव्यशास्त्र एवं साहित्यिक विधाओं का डिजिटल कोश</title>
   <!-- Google Fonts for Classical Devanagari Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <!-- Top Navigation Bar -->
-  <header class="navbar">
+  <header class="navbar" id="topHeroSection">
     <div class="container nav-inner">
       <div class="brand">
         <span class="brand-dot"></span>
@@ -24,6 +29,7 @@
         <button id="matraLabTrigger" type="button" class="btn-outline">📏 छंद-मात्रा गणक</button>
         <button id="quizTrigger" type="button" class="btn-outline">🎯 अभ्यास प्रश्नोत्तरी</button>
         <button id="compareTrigger" type="button" class="btn-outline">⇄ विधा-तुलना</button>
+        <button id="installAppBtn" type="button" class="btn-install">📲 ऐप इंस्टॉल करें</button>
         <button id="themeToggle" type="button" class="btn-icon" title="Change Theme">☀️</button>
       </div>
     </div>
@@ -31,7 +37,7 @@
 
   <!-- Hero Section -->
   <section class="hero container">
-    <span class="hero-tag">// डिजिटल मानविकी एवं साहित्य चिंतन कोश</span>
+    <span class="hero-tag">// डिजिटल मानविकी एवं साहित्य चिंतन कोश • ऑफ़लाइन PWA ऐप</span>
     <h1 class="hero-title">भारतीय काव्यशास्त्र और <span class="accent">साहित्यिक विधाओं</span> का अंतरंग संसार।</h1>
     <p class="hero-sub">
       काव्य की आत्मा, अलंकारों के शिल्प, छंदों के गणित और गद्य-पद्य विधाओं के ऐतिहासिक विकास को रटने के बजाय उदाहरणों, इंटरएक्टिव मात्रा-गणक और विश्लेषण के माध्यम से समझें।
@@ -131,6 +137,65 @@
     </div>
   </div>
 
+  <!-- Install App / PWA & APK Guide Modal -->
+  <div id="installModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <span class="card-badge">📲 मोबाइल एवं डेस्कटॉप ऐप</span>
+          <h2 style="margin-top: 0.4rem;">साहित्यसेतु (SahityaSetu) ऐप इंस्टॉल करें</h2>
+        </div>
+        <button id="closeInstallModal" type="button" class="btn-close">✕ बंद करें</button>
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.96rem;">
+        यह वेबसाइट अब एक <strong>Progressive Web App (PWA)</strong> है जो फोन और लैपटॉप पर बिना इंटरनेट (Offline) भी बिल्कुल नेटिव ऐप की तरह चलती है:
+      </p>
+      <div style="margin: 1rem 0;">
+        <button id="triggerNativeInstallBtn" type="button" class="btn-primary hidden">📲 अभी 1-क्लिक में ऐप इंस्टॉल करें</button>
+      </div>
+      <div class="install-steps-grid">
+        <div class="install-step-box">
+          <h4>🤖 Android (Chrome)</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">
+            ब्राउज़र के ऊपर दाईं ओर <strong>⋮ (तीन डॉट्स)</strong> पर टैप करें और <strong>"Install App"</strong> या <strong>"Add to Home Screen"</strong> चुनें।
+          </p>
+        </div>
+        <div class="install-step-box">
+          <h4>🍎 iPhone / iPad (Safari)</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">
+            नीचे <strong>Share (⬆️)</strong> बटन दबाएँ और <strong>"Add to Home Screen"</strong> पर टैप करें।
+          </p>
+        </div>
+        <div class="install-step-box">
+          <h4>📦 Android APK फ़ाइल</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">
+            सीधे `.apk` बनाने के लिए <strong>PWABuilder.com</strong> पर अपना GitHub Pages लिंक डालें और 1 मिनट में Android APK डाउनलोड कर लें।
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile App Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav" aria-label="मोबाइल नेविगेशन">
+    <button type="button" class="mob-nav-btn active" onclick="scrollToAppSection('topHeroSection', this)">
+      <span class="mob-nav-icon">📖</span>
+      <span>साहित्य कोश</span>
+    </button>
+    <button type="button" class="mob-nav-btn" onclick="scrollToAppSection('matraLabSection', this)">
+      <span class="mob-nav-icon">📏</span>
+      <span>मात्रा गणक</span>
+    </button>
+    <button type="button" class="mob-nav-btn" onclick="scrollToAppSection('quizSection', this)">
+      <span class="mob-nav-icon">🎯</span>
+      <span>प्रश्नोत्तरी</span>
+    </button>
+    <button type="button" class="mob-nav-btn" onclick="scrollToAppSection('comparisonSection', this)">
+      <span class="mob-nav-icon">⇄</span>
+      <span>विधा-तुलना</span>
+    </button>
+  </nav>
+
   <footer class="footer">
     <div class="container">
       <p><strong>साहित्यसेतु (SahityaSetu)</strong> — हिंदी साहित्य एवं भारतीय काव्यशास्त्र का ओपन-सोर्स वैचारिक मंच</p>
@@ -138,5 +203,12 @@
   </footer>
 
   <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
+      });
+    }
+  </script>
 </body>
 </html>

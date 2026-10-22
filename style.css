@@ -820,3 +820,92 @@ body.modal-open {
   color: var(--text-muted);
   font-size: 0.9rem;
 }
+
+/* PWA Install Button & Mobile Bottom Navigation Bar */
+.btn-install {
+  background: var(--gold-soft);
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-install:hover {
+  background: var(--gold);
+  color: #fff;
+}
+
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  z-index: 80;
+  padding: 0.35rem 0.5rem calc(0.35rem + env(safe-area-inset-bottom, 0px));
+  justify-content: space-around;
+  align-items: center;
+}
+
+.mob-nav-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.76rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.mob-nav-btn.active,
+.mob-nav-btn:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+  font-weight: 600;
+}
+
+.mob-nav-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 4.5rem;
+  }
+  .mobile-bottom-nav {
+    display: flex;
+  }
+}
+
+.install-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.install-step-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.install-step-box h4 {
+  color: var(--gold);
+  margin-bottom: 0.45rem;
+}

@@ -1,0 +1,38 @@
+{
+  "id": "/SahityaSetu/",
+  "name": "साहित्यसेतु (SahityaSetu) — हिंदी साहित्य कोश",
+  "short_name": "साहित्यसेतु",
+  "description": "भारतीय काव्यशास्त्र, अलंकार, छंद-मात्रा गणक एवं साहित्यिक विधाओं का इंटरएक्टिव ऐप",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0c0d10",
+  "theme_color": "#e11d48",
+  "lang": "hi",
+  "categories": [
+    "education",
+    "books",
+    "reference"
+  ],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

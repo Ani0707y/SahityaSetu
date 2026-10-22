@@ -1156,3 +1156,66 @@ renderCards();
 initMatraLab();
 initQuizEngine();
 initComparisons();
+
+// ================= PWA INSTALL & MOBILE APP NAVIGATION =================
+const installAppBtn = document.getElementById("installAppBtn");
+const installModal = document.getElementById("installModal");
+const closeInstallModal = document.getElementById("closeInstallModal");
+const triggerNativeInstallBtn = document.getElementById("triggerNativeInstallBtn");
+const mobNavBtns = document.querySelectorAll(".mob-nav-btn");
+
+let deferredInstallPrompt = null;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  if (triggerNativeInstallBtn) {
+    triggerNativeInstallBtn.classList.remove("hidden");
+  }
+});
+
+if (installAppBtn && installModal) {
+  installAppBtn.addEventListener("click", async () => {
+    if (deferredInstallPrompt) {
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+    } else {
+      installModal.classList.remove("hidden");
+      document.body.classList.add("modal-open");
+    }
+  });
+}
+
+if (triggerNativeInstallBtn) {
+  triggerNativeInstallBtn.addEventListener("click", async () => {
+    if (!deferredInstallPrompt) return;
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    installModal.classList.add("hidden");
+    document.body.classList.remove("modal-open");
+  });
+}
+
+if (closeInstallModal && installModal) {
+  closeInstallModal.addEventListener("click", () => {
+    installModal.classList.add("hidden");
+    document.body.classList.remove("modal-open");
+  });
+  installModal.addEventListener("click", (e) => {
+    if (e.target === installModal) {
+      installModal.classList.add("hidden");
+      document.body.classList.remove("modal-open");
+    }
+  });
+}
+
+window.scrollToAppSection = function(sectionId, btnEl) {
+  mobNavBtns.forEach(b => b.classList.remove("active"));
+  if (btnEl) btnEl.classList.add("active");
+  const target = document.getElementById(sectionId);
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth" });
+  }
+};
